@@ -1,3 +1,5 @@
+var current = window.location.href;
+
 //BLOCK WORDS
 findString = function findText(text) {
   if(window.find(text)){
@@ -7,11 +9,9 @@ findString = function findText(text) {
   };
 }
 
-findString("WordToBlock");
 
 //BLOCK THE PARTIAL DOMAINS
 findURL = function changeURL(text){
-  var current = window.location.href;
   if(current === text){
     window.location.replace("https://www.dimini.tk");
   }
@@ -19,7 +19,6 @@ findURL = function changeURL(text){
 
 //BLOCK THE ENTIRE DOMAIN WITH THE FOLLOWING FUNCTION
 findAllURL = function changeAllURL(text){
-  var current = window.location.href;
   if(current.startsWith(text)){
     document.documentElement.innerHTML = '';
     document.documentElement.innerHTML = 'Domain is blocked';
@@ -27,6 +26,26 @@ findAllURL = function changeAllURL(text){
   }
 }
 
+//ALLOW PARTIAL DOMAINS
+allowFindURL = function changeURL(monitored, allowed){
+  if(current.includes(monitored)){
+  	if (!current.includes(allowed)){
+    		window.location.replace(allowed);
+    	}
+  }
+}
 
-findAllURL("https://www.facebook.com/");
-findAllURL("https://pikabu.ru")
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    // listen for messages sent from background.js
+    if (request.message === 'url-change') {
+      current=request.url // new url is now in content scripts!
+      allowFindURL("vk.com","/im");
+    }
+});
+
+
+findString("WordToBlock");
+findAllURL("https://pikabu.ru");
+findAllURL("https://www.youtube.com");
+allowFindURL("vk.com","/im");

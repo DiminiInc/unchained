@@ -2,13 +2,18 @@
   "manifest_version": 2,
 
   "name": "Unchained",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Websites blocking",
-
+  "background": {
+    "scripts":["background.js"]
+  },
   "content_scripts": [{
     "js": ["content.js"],
     "matches": ["http://*/*", "https://*/*"]
   }],
+  "permissions": [
+    "tabs"
+  ],
   "browser_action": {
       "default_icon": "shackles.png",
       "default_popup": "uh-oh.html"
