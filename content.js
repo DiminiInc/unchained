@@ -42,10 +42,15 @@ chrome.runtime.onMessage.addListener(
       current=request.url // new url is now in content scripts!
       allowFindURL("vk.com","/im");
     }
+    //if (request.message === 'time-out') {
+    //  current=request.url // new url is now in content scripts!
+    //  findAllURL(current);
+    //}
 });
 
 
 findString("WordToBlock");
 findAllURL("https://pikabu.ru");
+findAllURL("https://www.reddit.com");
 findAllURL("https://www.youtube.com");
 allowFindURL("vk.com","/im");
