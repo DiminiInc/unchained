@@ -2,8 +2,12 @@
   "manifest_version": 2,
 
   "name": "Unchained",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Websites blocking",
+  "icons": { "16": "images/unchained-logo-16.png",
+             "48": "images/unchained-logo-48.png",
+             "128": "images/unchained-logo-128.png"
+  },
   "background": {
     "scripts":["background.js"],
     "persistent": true
@@ -16,7 +20,11 @@
     "tabs"
   ],
   "browser_action": {
-      "default_icon": "shackles.png",
+      "default_icon": {
+         "16": "images/clock-icon-16.png",
+         "24": "images/clock-icon-24.png",
+         "32": "images/clock-icon-32.png"
+      },
       "default_popup": "uh-oh.html"
     }
 }
