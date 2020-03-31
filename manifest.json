@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Unchained",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Websites blocking",
   "icons": { "16": "images/unchained-logo-16.png",
              "48": "images/unchained-logo-48.png",
@@ -18,6 +18,9 @@
   }],
   "permissions": [
     "tabs"
+  ],
+  "web_accessible_resources": [
+   "blocked.html"
   ],
   "browser_action": {
       "default_icon": {
