@@ -25,7 +25,7 @@ function FormatDuration(d) {
 var History = {};
 
 chrome.browserAction.setBadgeText({ 'text': '?'});
-chrome.browserAction.setBadgeBackgroundColor({ 'color': "#777" });
+chrome.browserAction.setBadgeBackgroundColor({ 'color': "#161616" });
 
 function Update(t, tabId, url) {
   if (!url) {
