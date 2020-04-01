@@ -49,7 +49,7 @@ function Update(t, tabId, url) {
   }
 
   chrome.browserAction.setBadgeText({ 'tabId': tabId, 'text': '0:00'});
-  chrome.browserAction.setPopup({ 'tabId': tabId, 'popup': "popup.html#tabId=" + tabId});
+  // chrome.browserAction.setPopup({ 'tabId': tabId, 'popup': "popup.html#tabId=" + tabId});
 }
 
 function HandleUpdate(tabId, changeInfo, tab) {
