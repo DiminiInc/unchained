@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Unchained",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Websites blocking",
   "icons": { "16": "images/unchained-logo-16.png",
              "48": "images/unchained-logo-48.png",
@@ -28,6 +28,6 @@
          "24": "images/clock-icon-24.png",
          "32": "images/clock-icon-32.png"
       },
-      "default_popup": "uh-oh.html"
+      "default_popup": "popup.html"
     }
 }
