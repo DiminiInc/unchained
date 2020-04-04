@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="/scripts/settings.js" defer=""></script>
 </head>
 <body style="background-color: #eaebec">
-<div style="width: 1000px;margin: 0 auto;">
+<div style="width: 1000px; margin: 0 auto;">
   <h1>Settings</h1>
   <h4>Blocked sites</h4>
-  <textarea name="message" rows="10" cols="30">
-Random text
+  <textarea id="blockedDomains" style="width: 100%; height: 150px;">
 </textarea>
 <h4>Blocked words</h4>
-  <textarea name="message" rows="10" cols="30">
-Random text
+  <textarea id="blockedWords" style="width: 100%; height: 150px;">
 </textarea>
 <h4>Partial blocked sites</h4>
-  <textarea name="message" rows="10" cols="30">
-Random text
+  <textarea id="partialBlockedDomains" style="width: 100%; height: 150px;">
 </textarea>
 <h4>Partial allowed sites</h4>
-  <textarea name="message" rows="10" cols="30">
-Random text
+  <textarea id="partialAllowedDomains" style="width: 100%; height: 150px;">
 </textarea>
+<input type="button" value="Submit" id="saveSettings" style="width: 100%; height: 50px;">
   </div>
 </body>
 </html>
