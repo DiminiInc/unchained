@@ -1,4 +1,3 @@
-*.min.js
-*.min.html
+*.min.*
 *.sublime-project
 *.sublime-workspace
