@@ -1,10 +1,34 @@
-let blockedWords = ["WordToBlock", "DiminiHatersCommunity"];
-let blockedPartialDomains = [];
-let allowedPartialDomains = [["vk.com","/im"]];
-let blockedDomains = ["https://pikabu.ru", "https://www.reddit.com", "https://www.youtube.com"];
+let blockedWords;
+let blockedPartialDomains;
+let allowedPartialDomains;
+let blockedDomains;
 
 let current = window.location.href;
 
+chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, function(response) {
+  blockedWords=response.blockedWords;
+  blockedDomains=response.blockedDomains;
+  blockedPartialDomains=response.partialBlockedDomains;
+  allowedPartialDomains=response.partialAllowedDomains;
+  allowedPartialDomains.forEach((element, index) => allowedPartialDomains[index]=element.split(" "));
+
+
+  for (const blockedWord of blockedWords){
+    findString(blockedWord);
+}
+
+for (const blockedPartialDomain of blockedPartialDomains){
+    findURL(blockedPartialDomain);
+}
+
+for (const allowedPartialDomain of allowedPartialDomains){
+    allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
+}
+
+for (const blockedDomain of blockedDomains){
+    findAllURL(blockedDomain);
+}
+});
 
 //BLOCK WORDS
 findString = function findText(text) {
@@ -51,19 +75,3 @@ chrome.runtime.onMessage.addListener(
     //  findAllURL(current);
     //}
 });
-
-for (const blockedWord of blockedWords){
-    findString(blockedWord);
-}
-
-for (const blockedPartialDomain of blockedPartialDomains){
-    findURL(blockedPartialDomain);
-}
-
-for (const allowedPartialDomain of allowedPartialDomains){
-    allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
-}
-
-for (const blockedDomain of blockedDomains){
-    findAllURL(blockedDomain);
-}

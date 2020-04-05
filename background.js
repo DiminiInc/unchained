@@ -98,6 +98,18 @@ setInterval(function(){var now = new Date();
     chrome.browserAction.setBadgeText({ 'tabId': parseInt(tabId), 'text': description});
   }}, 1000);
 
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getLocalStorage")
+      sendResponse({data: localStorage[request.key],
+        blockedDomains: JSON.parse(localStorage['blockedDomains']),
+        blockedWords: JSON.parse(localStorage['blockedWords']),
+        partialBlockedDomains: JSON.parse(localStorage['partialBlockedDomains']),
+        partialAllowedDomains: JSON.parse(localStorage['partialAllowedDomains'])
+      });
+    else
+      sendResponse({}); // snub them.
+});
+
 chrome.tabs.onUpdated.addListener(HandleUpdate);
 chrome.tabs.onRemoved.addListener(HandleRemove);
 chrome.tabs.onReplaced.addListener(HandleReplace);
