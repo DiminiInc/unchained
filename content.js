@@ -12,22 +12,29 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, f
   allowedPartialDomains=response.partialAllowedDomains;
   allowedPartialDomains.forEach((element, index) => allowedPartialDomains[index]=element.split(" "));
 
-
   for (const blockedWord of blockedWords){
-    findString(blockedWord);
-}
+    if (blockedWord!=""){
+      findString(blockedWord);
+    }
+  }
 
-for (const blockedPartialDomain of blockedPartialDomains){
-    findURL(blockedPartialDomain);
-}
+  for (const blockedPartialDomain of blockedPartialDomains){
+    if (blockedPartialDomains!=""){
+      findURL(blockedPartialDomain);
+    }
+  }
 
-for (const allowedPartialDomain of allowedPartialDomains){
-    allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
-}
+  for (const allowedPartialDomain of allowedPartialDomains){
+    if (allowedPartialDomain!=""){
+      allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
+    }
+  }
 
-for (const blockedDomain of blockedDomains){
-    findAllURL(blockedDomain);
-}
+  for (const blockedDomain of blockedDomains){
+    if (blockedDomain!=""){
+      findAllURL(blockedDomain);
+    }
+  }
 });
 
 //BLOCK WORDS
@@ -49,8 +56,8 @@ findURL = function changeURL(text){
 allowFindURL = function changeURL(monitored, allowed){
   if(current.includes(monitored)){
   	if (!current.includes(allowed)){
-    		window.location.replace(allowed);
-    	}
+    	window.location.replace(allowed);
+    }
   }
 }
 
@@ -67,7 +74,9 @@ chrome.runtime.onMessage.addListener(
     if (request.message === 'url-change') {
       current=request.url // new url is now in content scripts!
       for (const allowedPartialDomain of allowedPartialDomains){
-	    allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
+        if (allowedPartialDomain!=""){
+    	    allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
+        }
       }
     }
     //if (request.message === 'time-out') {
