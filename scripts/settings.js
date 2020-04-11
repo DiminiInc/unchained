@@ -7,6 +7,10 @@ window.onload = function(){
 	document.getElementById('partialBlockedDomains').value = inputValue.join("\n");
 	inputValue = JSON.parse(localStorage.getItem('partialAllowedDomains'));
 	document.getElementById('partialAllowedDomains').value = inputValue.join("\n");
+	inputValue = JSON.parse(localStorage.getItem('fisheyePlacebo'));
+	if (inputValue=="Yes"){
+		document.getElementById('fisheye-placebo').checked = true;
+	}
 };
 
 
@@ -20,4 +24,11 @@ saveSettings.onclick = function() {
 	localStorage.setItem('partialBlockedDomains', JSON.stringify(inputValue));
 	inputValue = document.getElementById('partialAllowedDomains').value.split("\n");
 	localStorage.setItem('partialAllowedDomains', JSON.stringify(inputValue));
+	if (document.getElementById('fisheye-placebo').checked){
+	inputValue = document.getElementById('fisheye-placebo').value;
+	localStorage.setItem('fisheyePlacebo', JSON.stringify(inputValue));
+	} else {
+		inputValue = "No";
+		localStorage.setItem('fisheyePlacebo', JSON.stringify(inputValue));
+	}
 };

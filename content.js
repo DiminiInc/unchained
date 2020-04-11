@@ -2,6 +2,7 @@ let blockedWords;
 let blockedPartialDomains;
 let allowedPartialDomains;
 let blockedDomains;
+let fisheyePlacebo="No";
 
 let current = window.location.href;
 
@@ -11,6 +12,8 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, f
   blockedPartialDomains=response.partialBlockedDomains;
   allowedPartialDomains=response.partialAllowedDomains;
   allowedPartialDomains.forEach((element, index) => allowedPartialDomains[index]=element.split(" "));
+  fisheyePlacebo=response.fisheyePlacebo;
+  console.log(fisheyePlacebo);
 
   for (const blockedWord of blockedWords){
     if (blockedWord!=""){
@@ -40,7 +43,11 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, f
 //BLOCK WORDS
 findString = function findText(text) {
   if(window.find(text)){
-    window.location.replace(chrome.runtime.getURL("blocked.html"));
+    if (fisheyePlacebo=="Yes"){
+      window.location.replace(chrome.runtime.getURL("blocked.html"));
+    } else {
+      window.location.replace(chrome.runtime.getURL("block.html"));
+    }
   };
 }
 
@@ -64,7 +71,11 @@ allowFindURL = function changeURL(monitored, allowed){
 //BLOCK THE ENTIRE DOMAIN WITH THE FOLLOWING FUNCTION
 findAllURL = function changeAllURL(text){
   if(current.startsWith(text)){
-    window.location.replace(chrome.runtime.getURL("blocked.html"));
+    if (fisheyePlacebo=="Yes"){
+      window.location.replace(chrome.runtime.getURL("blocked.html"));
+    } else {
+      window.location.replace(chrome.runtime.getURL("block.html"));
+    }
   }
 }
 

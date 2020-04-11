@@ -104,7 +104,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         blockedDomains: JSON.parse(localStorage['blockedDomains']),
         blockedWords: JSON.parse(localStorage['blockedWords']),
         partialBlockedDomains: JSON.parse(localStorage['partialBlockedDomains']),
-        partialAllowedDomains: JSON.parse(localStorage['partialAllowedDomains'])
+        partialAllowedDomains: JSON.parse(localStorage['partialAllowedDomains']),
+        fisheyePlacebo: JSON.parse(localStorage['fisheyePlacebo'])
       });
     else
       sendResponse({}); // snub them.
