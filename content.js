@@ -55,7 +55,11 @@ findString = function findText(text) {
 //BLOCK THE PARTIAL DOMAINS
 findURL = function changeURL(text){
   if(current === text){
-    window.location.replace("https://www.dimini.tk");
+    if (fisheyePlacebo=="Yes"){
+      window.location.replace(chrome.runtime.getURL("blocked.html"));
+    } else {
+      window.location.replace(chrome.runtime.getURL("block.html"));
+    }
   }
 }
 
