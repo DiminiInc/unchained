@@ -3,6 +3,7 @@ let blockedPartialDomains;
 let allowedPartialDomains;
 let blockedDomains;
 let fisheyePlacebo="No";
+let allowedPartialDomainsMap = new Map();
 
 let current = window.location.href;
 
@@ -12,8 +13,16 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, f
   blockedPartialDomains=response.partialBlockedDomains;
   allowedPartialDomains=response.partialAllowedDomains;
   allowedPartialDomains.forEach((element, index) => allowedPartialDomains[index]=element.split(" "));
+  for (const allowedPartialDomain of allowedPartialDomains){
+    if (allowedPartialDomain!=""){
+      if (allowedPartialDomainsMap.get(allowedPartialDomain[0])){
+        allowedPartialDomainsMap.get(allowedPartialDomain[0]).push(allowedPartialDomain[1])
+      } else {
+        allowedPartialDomainsMap.set(allowedPartialDomain[0], [allowedPartialDomain[1]])
+      }
+    }
+  }
   fisheyePlacebo=response.fisheyePlacebo;
-  console.log(fisheyePlacebo);
 
   for (const blockedWord of blockedWords){
     if (blockedWord!=""){
@@ -27,9 +36,9 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, f
     }
   }
 
-  for (const allowedPartialDomain of allowedPartialDomains){
-    if (allowedPartialDomain!=""){
-      allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
+  if (allowedPartialDomainsMap.size>0){
+    for (let [monitoredDomain, allowedURLs] of allowedPartialDomainsMap){
+      allowFindURL(monitoredDomain, allowedURLs);
     }
   }
 
@@ -66,8 +75,14 @@ findURL = function changeURL(text){
 //ALLOW PARTIAL DOMAINS
 allowFindURL = function changeURL(monitored, allowed){
   if(current.includes(monitored)){
-  	if (!current.includes(allowed)){
-    	window.location.replace(allowed);
+    let flag = true;
+    for (const allowedURL of allowed){
+      if (current.includes(allowedURL)){
+        flag = false;
+      }
+    }
+  	if (flag==true){
+    	 window.location.replace(allowed[0]);
     }
   }
 }
@@ -88,9 +103,9 @@ chrome.runtime.onMessage.addListener(
     // listen for messages sent from background.js
     if (request.message === 'url-change') {
       current=request.url // new url is now in content scripts!
-      for (const allowedPartialDomain of allowedPartialDomains){
-        if (allowedPartialDomain!=""){
-    	    allowFindURL(allowedPartialDomain[0], allowedPartialDomain[1]);
+      if (allowedPartialDomainsMap.size>0){
+        for (let [monitoredDomain, allowedURLs] of allowedPartialDomainsMap){
+          allowFindURL(monitoredDomain, allowedURLs);
         }
       }
     }
