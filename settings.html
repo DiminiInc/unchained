@@ -26,6 +26,20 @@
   <input type="checkbox" id="fisheye-placebo" name="fisheye-placebo" value="Yes" style="margin-top: 10px; margin-bottom: 10px;" >
   <label for="fisheye-placebo"> Use <a style="color: black;" href="https://www.yuumeiart.com/fisheye-placebo/?utm_source=unchained_extension&utm_medium=software&utm_campaign=unchained_settings">Fisheye Placebo</a> themed blocked page</label><br>
   <input type="button" value="Submit" id="saveSettings" style="width: 100%; height: 50px;">
+  <hr style="margin-bottom: 30px; margin-top: 30px;">
+  <h4>Import/export settings</h4>
+  <p>Import: paste settings to the text filed and press "Import" <b>(It would replace your current settings)</b><br>
+  Export: press "Export", then copy text field contents and save them on your accord</p>
+  <textarea id="settingsBuffer" style="width: 100%; height: 150px; box-sizing: border-box;">
+  </textarea>
+  <div class="flexTwoRows" style="display: flex;">
+    <div class="flexColumn" style="flex: 50%">
+      <input type="button" value="Import settings" id="importSettings" style="width: 100%; height: 50px;">
+    </div>
+    <div class="flexColumn" style="flex: 50%">
+      <input type="button" value="Export settings" id="exportSettings" style="width: 100%; height: 50px;">
+    </div>
   </div>
+</div>
 </body>
 </html>
