@@ -10,3 +10,9 @@ Features
 - Check amount of time spent on the webpage
 
 ![Screenshot](https://dimini.tk/en/site-files/software/unchained-screenshot-1.png)
+
+Download
+- Google Chrome: https://chrome.google.com/webstore/detail/gjlglcehpoenfhmdllofpifholjjogok
+- Mozilla Firefox: https://addons.mozilla.org/en-US/firefox/addon/unchained/
+- Microsoft Edge: https://microsoftedge.microsoft.com/addons/detail/kmoaannfmmeigenmkmgpmeefefcoidgm
+- Opera: https://addons.opera.com/en/extensions/details/unchained/ (currently available only for Opera Beta and Opera Developer channels)
