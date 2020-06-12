@@ -49,6 +49,10 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "blockedDomains"}, f
   }
 });
 
+stripProtocol = function stripProto(text) {
+  return text.replace("https://", "").replace("http://", "").replace(/^(www\.)/, "")
+}
+
 //BLOCK WORDS
 findString = function findText(text) {
   if(window.find(text)){
@@ -63,7 +67,7 @@ findString = function findText(text) {
 
 //BLOCK THE PARTIAL DOMAINS
 findURL = function changeURL(text){
-  if(current === text){
+  if(stripProtocol(current).startsWith(text)){
     if (fisheyePlacebo=="Yes"){
       window.location.replace(chrome.runtime.getURL("blocked.html"));
     } else {
@@ -74,10 +78,10 @@ findURL = function changeURL(text){
 
 //ALLOW PARTIAL DOMAINS
 allowFindURL = function changeURL(monitored, allowed){
-  if(current.includes(monitored)){
+  if(stripProtocol(current).startsWith(monitored)){
     let flag = true;
     for (const allowedURL of allowed){
-      if (current.includes(allowedURL)){
+      if (stripProtocol(current).startsWith(monitored+allowedURL)){
         flag = false;
       }
     }
@@ -89,7 +93,7 @@ allowFindURL = function changeURL(monitored, allowed){
 
 //BLOCK THE ENTIRE DOMAIN WITH THE FOLLOWING FUNCTION
 findAllURL = function changeAllURL(text){
-  if(current.startsWith(text)){
+  if(stripProtocol(current).startsWith(text)){
     if (fisheyePlacebo=="Yes"){
       window.location.replace(chrome.runtime.getURL("blocked.html"));
     } else {
